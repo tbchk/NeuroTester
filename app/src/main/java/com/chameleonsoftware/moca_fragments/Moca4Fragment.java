@@ -1,19 +1,27 @@
 package com.chameleonsoftware.moca_fragments;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.chameleonsoftware.neurotester.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by camaleon2 on 26/11/15.
@@ -22,82 +30,90 @@ import com.chameleonsoftware.neurotester.R;
 
 
 
-public class Moca4Fragment extends Fragment implements View.OnTouchListener {
+public class Moca4Fragment extends Fragment{
 
     ImageView visor;
-    Bitmap bm;
-    Canvas canvas;
-    Paint paint;
+    ImageButton recordButton;
 
-    private int[] posA = new int[2];
-    private int[] posB = new int[2];
+
+    private static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
+    private static final int RESULT_OK = -1;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_moca3,container,false);
+        View rootView = inflater.inflate(R.layout.moca_fragment_moca4, container, false);
 
-        visor = (ImageView) rootView.findViewById(R.id.moca3view);
-        bm = Bitmap.createBitmap(800,600, Bitmap.Config.ARGB_8888);
+        visor = (ImageView) rootView.findViewById(R.id.moca4View);
+        recordButton = (ImageButton) rootView.findViewById(R.id.moca4RecordButton);
 
-        canvas = new Canvas(bm);
-        paint = new Paint();
+        Bitmap originalBm = BitmapFactory.decodeResource(getResources(), R.drawable.leonmoca);
+        Bitmap mutableBitmap = originalBm.copy(Bitmap.Config.ARGB_8888, true);
 
-        paint.setColor(Color.GRAY);
-        paint.setStrokeWidth(15);
-        paint.setStyle(Paint.Style.STROKE);
+        visor.setImageBitmap(mutableBitmap);
 
-        canvas.drawRect(0, 0, 800, 600, paint);
+        PackageManager pm = getActivity().getPackageManager();
 
-        paint.setColor(Color.BLACK);
-        paint.setStrokeWidth(8);
+        List<ResolveInfo> activities = pm.queryIntentActivities(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
+        // In code listener to avoid new functions
+        recordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startVoiceRecognitionActivity();
+            }
+
+        });
 
 
-
-        visor.setImageBitmap(bm);
-        visor.setOnTouchListener(this);
 
         return rootView;
-
     }
 
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        int action = event.getAction();
-
-        switch (action) {
-            case MotionEvent.ACTION_DOWN:
-
-                posA[0] = (int)event.getX();
-                posA[1] = (int)event.getY();
-
-                posB[0] = posA[0];
-                posB[1] = posA[1];
+    @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 
-                break;
+        if (requestCode == VOICE_RECOGNITION_REQUEST_CODE && resultCode == RESULT_OK) {
 
-            case MotionEvent.ACTION_MOVE:
-                posB[0]=(int)event.getX();
-                posB[1] = (int)event.getY();
+            ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 
-                canvas.drawLine(posA[0], posA[1],posB[0],posB[1], paint);
-                visor.invalidate();
 
-                posA[0] = posB[0];
-                posA[1] = posB[1];
+            final CharSequence[] items = new CharSequence[matches.size()];
 
-                break;
-            case MotionEvent.ACTION_UP:
+            for(int i = 0; i < matches.size(); i++){
 
-                break;
-            case MotionEvent.ACTION_CANCEL:
-                break;
-            default:
-                break;
+                items[i] = matches.get(i);
+
+            }
+
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Select Result");
+            builder.setItems(items, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int item) {
+                   // txtSearch.setText(items[item].toString());
+                    Log.e("Reconocido",items[item].toString());
+                }
+            });
+
+            AlertDialog alert = builder.create();
+
+            alert.show();
         }
-        return true;
+
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+
     }
+
+    private void startVoiceRecognitionActivity(){
+            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "");
+            startActivityForResult(intent, VOICE_RECOGNITION_REQUEST_CODE);
+    }
+
 }

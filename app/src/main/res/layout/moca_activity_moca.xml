@@ -21,6 +21,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/MOCA_content_moca" />
+    <include layout="@layout/moca_content_moca" />
 
 </android.support.design.widget.CoordinatorLayout>

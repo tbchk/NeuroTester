@@ -18,7 +18,7 @@ public class ConfigFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_config,container,false);
+        View rootView = inflater.inflate(R.layout.main_fragment_config,container,false);
         return rootView;
 
     }

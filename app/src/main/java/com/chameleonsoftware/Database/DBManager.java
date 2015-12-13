@@ -12,8 +12,6 @@ import com.chameleonsoftware.neurotester.MocaUser;
 import java.util.ArrayList;
 import java.util.List;
 
-import finalw.robotica.sena.proyecto.qr.late.myapplication.Database.DBAlumnData;
-
 /**
  * Created by camaleon2 on 17/10/15.
  */
@@ -130,7 +128,7 @@ public class DBManager extends SQLiteOpenHelper {
 
     }
 
-    /*CONSULTA DE LLEGADAS TARDE POR FECHA*/
+    /*
     public List<MocaUser> getAllUserbyDate(String R_date) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -165,7 +163,7 @@ public class DBManager extends SQLiteOpenHelper {
 
         // return user list
         return alumnList;
-    }
+    }*/
 
     /******************* NUNCA OLVIDAR CERRAR LA DB ****************************/
     public  void closeDB(){this.getWritableDatabase().close();}

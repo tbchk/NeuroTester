@@ -17,7 +17,7 @@ public class MocaInfoFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_mocainfo,container,false);
+        View rootView = inflater.inflate(R.layout.main_fragment_mocainfo,container,false);
         return rootView;
 
     }
