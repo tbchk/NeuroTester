@@ -17,6 +17,7 @@ import com.chameleonsoftware.moca_fragments.MocaDialog;
 public class MocaActivity extends AppCompatActivity {
 
     private Moca1Fragment moca1;
+    private Moca4Fragment moca4;
     private MocaUser mocaUser;
 
     @Override
@@ -46,8 +47,9 @@ public class MocaActivity extends AppCompatActivity {
                 intent.getStringExtra("phone"),intent.getStringExtra("study"));
 
         moca1 = new Moca1Fragment();
+        moca4 = new Moca4Fragment();
         FragmentManager fm = getFragmentManager();
-        fm.beginTransaction().replace(R.id.content_mocaframe, moca1).commit();
+        fm.beginTransaction().replace(R.id.content_mocaframe, moca4).commit();
     }
 
     public void moca1Create(){

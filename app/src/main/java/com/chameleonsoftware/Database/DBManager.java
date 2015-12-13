@@ -103,11 +103,11 @@ public class DBManager extends SQLiteOpenHelper {
         int id = new Integer(uData.getId());
         String date = uData.getDate();
         String name = uData.getName();
-        String lastname = uData.getName();
-        String email = uData.getName();
-        String gender = uData.getName();
-        String phone = uData.getName();
-        String study = uData.getName();
+        String lastname = uData.getLastname();
+        String email = uData.getEmail();
+        String gender = uData.getGender();
+        String phone = uData.getPhone();
+        String study = uData.getStudy();
 
         cVal.put(KEY_ID,id);
         cVal.put(KEY_DATE, date);

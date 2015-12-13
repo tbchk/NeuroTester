@@ -18,10 +18,13 @@ public class MocaUser {
 
     //Moca 1
     Bitmap moca1Bitmap;
-    int moca1Time; //Seconds
-
-    //Moca 2
     Bitmap moca2Bitmap;
+    Bitmap moca3Bitmap;
+
+
+    int moca1Time; //Seconds
+    int moca2Time;
+    int moca3Time;
 
 
     public MocaUser(String id,String date, String name, String lastname, String email, String gender, String phone,String study) {
@@ -51,34 +54,57 @@ public class MocaUser {
         return moca1Time;
     }
 
+    //========================== MOCA 2 ======================================
+    public void setMoca2Bitmap(Bitmap moca2Bitmap) {
+        this.moca2Bitmap = moca2Bitmap;
+    }
+    public Bitmap getMoca2Bitmap() {
+        return moca2Bitmap;
+    }
+    public void setMoca2Time(int moca2Time) {
+        this.moca2Time = moca2Time;
+    }
+    public int getMoca2Time() {
+        return moca2Time;
+    }
+
+    // ========================= MOCA 3 ========================================
+    public void setMoca3Bitmap(Bitmap moca3Bitmap) {
+        this.moca3Bitmap = moca3Bitmap;
+    }
+    public Bitmap getMoca3Bitmap() {
+        return moca3Bitmap;
+    }
+    public int getMoca3Time() {
+        return moca3Time;
+    }
+    public void setMoca3Time(int moca3Time) {
+        this.moca3Time = moca3Time;
+    }
+
+
+    // PERSONAL DATA ACCESS
     public String getId() {
         return id;
     }
-
     public String getDate() {
         return date;
     }
-
     public String getName() {
         return name;
     }
-
     public String getLastname() {
         return lastname;
     }
-
     public String getEmail() {
         return email;
     }
-
     public String getGender() {
         return gender;
     }
-
     public String getPhone() {
         return phone;
     }
-
     public String getStudy() {
         return study;
     }
