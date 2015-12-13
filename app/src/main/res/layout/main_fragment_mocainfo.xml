@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal|top"
+        android:weightSum="1">
+
+        <ImageView
+            android:layout_width="169dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:src="@mipmap/moca_logo"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.19" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView5"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_marginTop="5dp"
+            android:textAlignment="center"
+            android:textIsSelectable="false"
+            android:text="La Evaluación Cognitiva Montreal (Montreal cognitive assessment / MoCA) ha sido concebida para evaluar las disfunciones cognitivas leves. Este instrumento examina las siguientes habilidades: atención, concentración, funciones ejecutivas (incluyendo la capacidad de abstracción), memoria, lenguaje, capacidades visuoconstructivas, cálculo y orientación. El tiempo de administración requerido es de aproximadamente diez minutos. El puntaje máximo es de 30; un puntaje igual o superior a 26 se considera normal. " />
+
+    </LinearLayout>
+
+</FrameLayout>

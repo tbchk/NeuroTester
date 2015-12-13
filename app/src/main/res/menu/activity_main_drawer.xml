@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_inicio" android:icon="@drawable/custom_home"
+            android:title="Inicio" />
+        <item android:id="@+id/nav_config" android:icon="@android:drawable/ic_menu_manage"
+            android:title="Configuración" />
+        <item android:id="@+id/nav_about" android:icon="@drawable/ic_people_black_24dp"
+            android:title="Acerca De" />
+    </group>
+
+    <item android:title="MOCA">
+        <menu>
+            <item android:id="@+id/nav_newMoca" android:icon="@android:drawable/ic_menu_add"
+                android:title="Nueva prueba" />
+            <item android:id="@+id/nav_queryMoca" android:icon="@android:drawable/ic_menu_search"
+                android:title="Consultar" />
+            <item android:id="@+id/nav_infoMoca" android:icon="@android:drawable/ic_menu_info_details"
+                android:title="Información" />
+        </menu>
+    </item>
+</menu>
