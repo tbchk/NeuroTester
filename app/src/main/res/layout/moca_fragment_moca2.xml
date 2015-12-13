@@ -65,7 +65,7 @@
             <ImageButton
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:id="@+id/moca2StartButton"
+                android:id="@+id/moca4StartButton"
                 android:src="@drawable/custom_play"
                 android:onClick="moca1RefreshClick"
                 android:layout_alignParentStart="true"
@@ -79,14 +79,14 @@
                 android:src="@drawable/custom_refresh"
                 android:onClick="moca1RefreshClick"
                 android:background="@android:color/darker_gray"
-                android:layout_alignTop="@+id/moca2StartButton"
-                android:layout_alignBottom="@+id/moca2StartButton"
-                android:layout_toRightOf="@+id/moca2StartButton" />
+                android:layout_alignTop="@+id/moca4StartButton"
+                android:layout_alignBottom="@+id/moca4StartButton"
+                android:layout_toRightOf="@+id/moca4StartButton" />
 
             <ImageButton
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:id="@+id/moca2NextButton"
+                android:id="@+id/moca4NextButton"
                 android:src="@drawable/custom_next"
                 android:onClick="moca3Create"
                 android:background="@android:color/darker_gray"

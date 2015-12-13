@@ -76,9 +76,9 @@ public class Moca2Fragment extends Fragment implements View.OnTouchListener{
         imageVisor1 = (ImageView) rootView.findViewById(R.id.moca2view1);
         imageVisor2 = (ImageView) rootView.findViewById(R.id.moca4View);
 
-        startBtn = (ImageButton) rootView.findViewById(R.id.moca2StartButton);
+        startBtn = (ImageButton) rootView.findViewById(R.id.moca4StartButton);
         refreshBtn = (ImageButton) rootView.findViewById(R.id.moca2RefreshButton);
-        nextButton = (ImageButton) rootView.findViewById(R.id.moca2NextButton);
+        nextButton = (ImageButton) rootView.findViewById(R.id.moca4NextButton);
 
         timerTextView = (TextView) rootView.findViewById(R.id.moca2TimerText);
 

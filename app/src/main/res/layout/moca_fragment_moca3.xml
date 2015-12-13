@@ -58,14 +58,14 @@
             <ImageButton
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:id="@+id/moca2StartButton"
+                android:id="@+id/moca4StartButton"
                 android:src="@drawable/custom_play"
                 android:onClick="moca1RefreshClick"
                 android:layout_alignParentStart="false"
                 android:background="@android:color/holo_green_dark"
                 android:layout_alignParentLeft="true"
-                android:layout_alignTop="@+id/moca2NextButton"
-                android:layout_alignBottom="@+id/moca2NextButton" />
+                android:layout_alignTop="@+id/moca4NextButton"
+                android:layout_alignBottom="@+id/moca4NextButton" />
 
             <ImageButton
                 android:layout_width="50dp"
@@ -74,14 +74,14 @@
                 android:src="@drawable/custom_refresh"
                 android:onClick="moca1RefreshClick"
                 android:background="@android:color/darker_gray"
-                android:layout_toRightOf="@+id/moca2StartButton"
-                android:layout_alignTop="@+id/moca2StartButton"
-                android:layout_alignBottom="@+id/moca2StartButton" />
+                android:layout_toRightOf="@+id/moca4StartButton"
+                android:layout_alignTop="@+id/moca4StartButton"
+                android:layout_alignBottom="@+id/moca4StartButton" />
 
             <ImageButton
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:id="@+id/moca2NextButton"
+                android:id="@+id/moca4NextButton"
                 android:src="@drawable/custom_next"
                 android:onClick="moca4Create"
                 android:background="@android:color/darker_gray"

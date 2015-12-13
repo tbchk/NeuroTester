@@ -65,14 +65,11 @@ public class DBManager extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        if (DEBUG)
-            Log.i(LOG_TAG, "new create");
 
+        if (DEBUG) Log.i(LOG_TAG, "new create");
 
         try {
             db.execSQL(TABLE_CREATE);
-
-
         } catch (Exception exception) {
             if (DEBUG)
                 Log.i(LOG_TAG, "Exception onCreate() exception");
