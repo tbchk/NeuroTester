@@ -7,33 +7,13 @@
         android:layout_height="match_parent"
         android:gravity="center_horizontal">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical|center_horizontal"
-            android:id="@+id/LayoutTitulo"
-            android:weightSum="1"
-            android:layout_marginBottom="5dp"
-            android:layout_above="@+id/moca1view">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/timerTextView1"
-                android:textStyle="bold"
-                android:textAlignment="center" />
-
-        </LinearLayout>
-
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/BarLayout"
-            android:layout_below="@+id/moca1view"
-            android:layout_alignLeft="@+id/moca1view"
-            android:layout_alignRight="@+id/moca1view">
+            android:id="@+id/moca1BarLayout"
+            android:layout_below="@+id/moca1View"
+            android:layout_alignLeft="@+id/moca1View"
+            android:layout_alignRight="@+id/moca1View">
 
             <ImageButton
                 android:layout_width="50dp"
@@ -71,9 +51,16 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/moca1view"
+            android:id="@+id/moca1View"
             android:layout_gravity="center"
             android:layout_centerInParent="true" />
+
+        <Chronometer
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/moca1Chrono"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/moca1View" />
 
     </RelativeLayout>
 

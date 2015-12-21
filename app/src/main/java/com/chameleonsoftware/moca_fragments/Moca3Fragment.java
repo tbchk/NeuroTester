@@ -71,7 +71,7 @@ public class Moca3Fragment extends Fragment implements View.OnTouchListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.moca_fragment_moca3, container, false);
+        View rootView = inflater.inflate(R.layout.moca_fragment3, container, false);
 
         setDrawingArea();
 

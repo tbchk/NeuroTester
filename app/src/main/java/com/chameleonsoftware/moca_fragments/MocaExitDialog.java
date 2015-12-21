@@ -11,7 +11,7 @@ import com.chameleonsoftware.neurotester.MocaActivity;
 /**
  * Created by camaleon2 on 12/12/15.
  */
-public class MocaDialog extends DialogFragment {
+public class MocaExitDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder =

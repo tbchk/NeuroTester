@@ -7,7 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.os.Handler;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -16,11 +16,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Chronometer;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.chameleonsoftware.neurotester.MocaUser;
 import com.chameleonsoftware.neurotester.R;
 
 /**
@@ -28,87 +27,127 @@ import com.chameleonsoftware.neurotester.R;
  */
 public class Moca1Fragment extends Fragment implements View.OnTouchListener{
 
-    MocaUser mocaUser;
+    private Chronometer mChrono;
 
     //Botones
-    private ImageButton startBtn;
-    private ImageButton refreshBtn;
-    private ImageButton nextButton;
+    private ImageButton mStartBtn;
+    private ImageButton mRefreshBtn;
+    private ImageButton mNextBtn;
 
-
-
-    private ImageView imageVisor;
-    private Canvas canvas;
-    private Paint paint;
-
-    private int[] posA = new int[2];
-    private int[] posB = new int[2];
+    //Dibujo
+    private int[][] mTouchPos = new int[2][2];
+    private ImageView mImageVisor;
+    private Canvas mCanvas;
+    private Paint mPaint;
 
     //Dimensiones en pulgadas de la imágen estándar (Validación)
-    private double[] realSizeArea = {2.76,2.56};
-
-    //Dimensiones equivalente en pixels de la imágen real
+    private double[] realSizeArea = {2.76,2.56};//Pulgadas
     private int[] pixelSizeAreaeq = new int[2];
 
-
+    //Temporal and drawing Bitmaps
+    private Bitmap mDrawingBitmap;
     private Bitmap mutableBitmap;
-    private Bitmap scaledBitmap;
-    private int resultTime=0;
-
-
-    //TIMER SETTINGS
-    TextView timerTextView;
-    long startTime = 0;
-    //runs without a timer by reposting this handler at the end of the runnable
-    Handler timerHandler = new Handler();
-    Runnable timerRunnable = new Runnable() {
-
-        @Override
-        public void run() {
-            long millis = System.currentTimeMillis() - startTime;
-            int seconds = (int) (millis / 1000);
-            int minutes = seconds / 60;
-            seconds = seconds % 60;
-
-            timerTextView.setText(String.format("(%d:%02d)", minutes, seconds));
-            resultTime+=1;
-
-            timerHandler.postDelayed(this, 1000);
-        }
-    };
-    // END OF TIMER SETTINGS
-
-
-
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.moca_fragment1, container, false);
+        //noinspection ConstantConditions
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Visuoespacial/Ejecutiva 1");
+
+        //Widget get
+        mImageVisor = (ImageView) rootView.findViewById(R.id.moca1View);
+        mStartBtn = (ImageButton) rootView.findViewById(R.id.moca1Play);
+        mRefreshBtn = (ImageButton) rootView.findViewById(R.id.moca1Refresh);
+        mNextBtn = (ImageButton) rootView.findViewById(R.id.moca1Next);
+        mChrono = (Chronometer) rootView.findViewById(R.id.moca1Chrono);
 
 
-        View rootView = inflater.inflate(R.layout.moca_fragment_moca1, container, false);
+        bmSetup();
+        moca1refresh();
+
+        mImageVisor.setOnTouchListener(this);
+        mRefreshBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                moca1refresh();
+            }
+
+        });
+
+        // In code listener to avoid new Classes
+        mStartBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                mChrono.setBase(SystemClock.elapsedRealtime());
+                mChrono.start();
+
+                mImageVisor.setEnabled(true);
+                mRefreshBtn.setEnabled(true);
+                mNextBtn.setEnabled(true);
+                mStartBtn.setEnabled(false);
+
+                mStartBtn.setBackgroundColor(ContextCompat.getColor(getActivity(), android.R.color.darker_gray));
+                mRefreshBtn.setBackgroundColor(ContextCompat.getColor(getActivity(), android.R.color.holo_green_dark));
+                mNextBtn.setBackgroundColor(ContextCompat.getColor(getActivity(), android.R.color.holo_green_dark));
+
+            }
+
+        });
+
+        //Disable Buttons while Start
+        mImageVisor.setEnabled(false);
+        mRefreshBtn.setEnabled(false);
+        mNextBtn.setEnabled(false);
+
+        return rootView;
+    }
 
 
-        imageVisor = (ImageView) rootView.findViewById(R.id.moca1view);
-        timerTextView = (TextView) rootView.findViewById(R.id.timerTextView1);
-        startBtn = (ImageButton) rootView.findViewById(R.id.moca1Play);
-        refreshBtn = (ImageButton) rootView.findViewById(R.id.moca1Refresh);
-        nextButton = (ImageButton) rootView.findViewById(R.id.moca1Next);
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        int action = event.getAction();
 
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                //P1 Coordinates
+                mTouchPos[0][0] = (int)event.getX();
+                mTouchPos[1][0] = (int)event.getY();
+                break;
 
-        //User class
+            case MotionEvent.ACTION_MOVE:
+                //P2 Coordinates
+                mTouchPos[0][1] = (int)event.getX();
+                mTouchPos[1][1] = (int)event.getY();
 
+                //Line Drawing
+                mCanvas.drawLine(mTouchPos[0][0], mTouchPos[1][0], mTouchPos[0][1], mTouchPos[1][1], mPaint);
+                //Force Redrawing
+                mImageVisor.invalidate();
 
+                //P1 = P2
+                mTouchPos[0][0] = mTouchPos[0][1];
+                mTouchPos[1][0] = mTouchPos[1][1];
 
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+            case MotionEvent.ACTION_CANCEL:
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
 
-
-
-
-        //Bitmap ALG
+    //Bitmap Initial Setup and Metrics set
+    private void bmSetup(){
         Bitmap originalImage = BitmapFactory.decodeResource(getResources(), R.drawable.custom_mocatest);
         mutableBitmap = originalImage.copy(Bitmap.Config.ARGB_8888, true);
 
-        DisplayMetrics metrics = rootView.getResources().getDisplayMetrics();
+        DisplayMetrics metrics = getActivity().getResources().getDisplayMetrics();
         float totalDIP_X = metrics.xdpi;
         float totalDIP_Y = metrics.ydpi;
         pixelSizeAreaeq[0] = (int)(realSizeArea[0]*totalDIP_X);
@@ -123,122 +162,40 @@ public class Moca1Fragment extends Fragment implements View.OnTouchListener{
 
             pixelSizeAreaeq[1] = (int)(newinchesA*totalDIP_Y);
         }
-
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle("Visuoespacial/Ejecutiva 1");
-
-    // metrics.widthPixels
-        moca1refresh();
-
-        imageVisor.setOnTouchListener(this);
-
-        refreshBtn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                moca1refresh();
-            }
-
-        });
-
-        // In code listener to avoid new functions
-        startBtn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                    startTime = System.currentTimeMillis();
-                    timerHandler.postDelayed(timerRunnable, 0);
-
-                    imageVisor.setEnabled(true);
-                    refreshBtn.setEnabled(true);
-                    nextButton.setEnabled(true);
-
-                    startBtn.setBackgroundColor(ContextCompat.getColor(getActivity(), android.R.color.darker_gray));
-                    refreshBtn.setBackgroundColor(ContextCompat.getColor(getActivity(), android.R.color.holo_green_dark));
-                    nextButton.setBackgroundColor(ContextCompat.getColor(getActivity(), android.R.color.holo_green_dark));
-                    startBtn.setEnabled(false);
-                }
-
-        });
-
-        imageVisor.setEnabled(false);
-        refreshBtn.setEnabled(false);
-        nextButton.setEnabled(false);
-
-        return rootView;
-    }
-
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        int action = event.getAction();
-
-        switch (action) {
-            case MotionEvent.ACTION_DOWN:
-
-                posA[0] = (int)event.getX();
-                posA[1] = (int)event.getY();
-
-                posB[0] = posA[0];
-                posB[1] = posA[1];
-                break;
-
-            case MotionEvent.ACTION_MOVE:
-                posB[0]=(int)event.getX();
-                posB[1] = (int)event.getY();
-
-                canvas.drawLine(posA[0], posA[1],posB[0],posB[1], paint);
-                imageVisor.invalidate();
-
-                posA[0] = posB[0];
-                posA[1] = posB[1];
-
-                break;
-            case MotionEvent.ACTION_UP:
-
-                break;
-            case MotionEvent.ACTION_CANCEL:
-                break;
-            default:
-                break;
-        }
-        return true;
     }
 
     public void moca1refresh(){
-        scaledBitmap = Bitmap.createScaledBitmap (mutableBitmap, pixelSizeAreaeq[0], pixelSizeAreaeq[1], false);
-        canvas = new Canvas(scaledBitmap);
+        mDrawingBitmap = Bitmap.createScaledBitmap (mutableBitmap, pixelSizeAreaeq[0], pixelSizeAreaeq[1], false);
+        mCanvas = new Canvas(mDrawingBitmap);
 
         //Painter
-        paint = new Paint();
-        paint.setColor(Color.GRAY);
-        paint.setStrokeWidth(15);
-        paint.setStyle(Paint.Style.STROKE);
+        mPaint = new Paint();
+        mPaint.setColor(Color.GRAY);
+        mPaint.setStrokeWidth(15);
+        mPaint.setStyle(Paint.Style.STROKE);
 
         //Creo el contorno del área de dibujo
-        canvas.drawRect(0, 0, pixelSizeAreaeq[0], pixelSizeAreaeq[1], paint);
+        mCanvas.drawRect(0, 0, pixelSizeAreaeq[0], pixelSizeAreaeq[1], mPaint);
 
         //Cambio de paleta para dibujar
-        paint.setColor(Color.BLACK);
-        paint.setStrokeWidth(8);
+        mPaint.setColor(Color.BLACK);
+        mPaint.setStrokeWidth(8);
 
-        //scaledBitmap = moca1RefreshClick(rootView);
+        //mDrawingBitmap = moca1RefreshClick(rootView);
 
         //Visor
-        imageVisor.setImageBitmap(scaledBitmap);
+        mImageVisor.setImageBitmap(mDrawingBitmap);
     }
     public void stopTimer(){
-        timerHandler.removeCallbacks(timerRunnable);
-    }
-
-    public void setMocaUser(MocaUser mocaUser){
-        this.mocaUser = mocaUser;
+        mChrono.stop();
     }
 
     public Bitmap getResultBitmap(){
-        return scaledBitmap;
+        return mDrawingBitmap;
     }
     public int getResultTime(){
-        return resultTime;
+        long elapsedMillis = SystemClock.elapsedRealtime() - mChrono.getBase();
+        return (int)elapsedMillis/1000;
     }
 
 }

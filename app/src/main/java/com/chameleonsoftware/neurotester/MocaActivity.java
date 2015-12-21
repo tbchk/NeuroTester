@@ -12,7 +12,7 @@ import com.chameleonsoftware.moca_fragments.Moca1Fragment;
 import com.chameleonsoftware.moca_fragments.Moca2Fragment;
 import com.chameleonsoftware.moca_fragments.Moca3Fragment;
 import com.chameleonsoftware.moca_fragments.Moca4Fragment;
-import com.chameleonsoftware.moca_fragments.MocaDialog;
+import com.chameleonsoftware.moca_fragments.MocaExitDialog;
 
 public class MocaActivity extends AppCompatActivity {
 
@@ -30,7 +30,7 @@ public class MocaActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MocaDialog exitDialog = new MocaDialog();
+                MocaExitDialog exitDialog = new MocaExitDialog();
                 exitDialog.show(getFragmentManager(), "tagAlerta");
             }
         });
@@ -49,7 +49,7 @@ public class MocaActivity extends AppCompatActivity {
         moca1 = new Moca1Fragment();
         moca4 = new Moca4Fragment();
         FragmentManager fm = getFragmentManager();
-        fm.beginTransaction().replace(R.id.content_mocaframe, moca4).commit();
+        fm.beginTransaction().replace(R.id.content_mocaframe, moca1).commit();
     }
 
     public void moca1Create(){
@@ -78,7 +78,7 @@ public class MocaActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        MocaDialog exitDialog = new MocaDialog();
+        MocaExitDialog exitDialog = new MocaExitDialog();
         exitDialog.show(getFragmentManager(),"tagAlerta");
         //super.onBackPressed();
     }

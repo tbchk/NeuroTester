@@ -2,6 +2,8 @@ package com.chameleonsoftware.neurotester;
 
 import android.graphics.Bitmap;
 
+import java.io.ByteArrayOutputStream;
+
 /**
  * Created by camaleon2 on 30/11/15.
  */
@@ -38,6 +40,13 @@ public class MocaUser {
         this.study = study;
 
         moca1Bitmap=null;
+    }
+
+
+    public byte[] getBitmapByteArray(Bitmap bm){
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG, 100, bos);
+        return bos.toByteArray();
     }
 
     //========================= MOCA 1 ========================================
@@ -81,6 +90,8 @@ public class MocaUser {
     public void setMoca3Time(int moca3Time) {
         this.moca3Time = moca3Time;
     }
+
+
 
 
     // PERSONAL DATA ACCESS

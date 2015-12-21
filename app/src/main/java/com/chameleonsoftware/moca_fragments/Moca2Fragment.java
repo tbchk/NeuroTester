@@ -72,7 +72,7 @@ public class Moca2Fragment extends Fragment implements View.OnTouchListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.moca_fragment_moca2,container,false);
+        View rootView = inflater.inflate(R.layout.moca_fragment2,container,false);
         imageVisor1 = (ImageView) rootView.findViewById(R.id.moca2view1);
         imageVisor2 = (ImageView) rootView.findViewById(R.id.moca4View);
 

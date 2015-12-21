@@ -30,7 +30,7 @@ import java.util.List;
 
 
 
-public class Moca4Fragment extends Fragment{
+public class Moca4RFragment extends Fragment{
 
     ImageView visor;
     ImageButton recordButton;
