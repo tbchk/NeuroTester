@@ -1,67 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/moca1BarLayout"
+        android:layout_below="@+id/moca1View"
+        android:layout_alignLeft="@+id/moca1View"
+        android:layout_alignRight="@+id/moca1View">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/moca1BarLayout"
-            android:layout_below="@+id/moca1View"
-            android:layout_alignLeft="@+id/moca1View"
-            android:layout_alignRight="@+id/moca1View">
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/moca1Play"
+            android:src="@drawable/custom_play"
+            android:onClick="moca1RefreshClick"
+            android:layout_alignParentStart="true"
+            android:background="@android:color/holo_green_dark"
+            android:layout_alignParentLeft="true" />
 
-            <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:id="@+id/moca1Play"
-                android:src="@drawable/custom_play"
-                android:onClick="moca1RefreshClick"
-                android:layout_alignParentStart="true"
-                android:background="@android:color/holo_green_dark"
-                android:layout_alignParentLeft="true" />
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/moca1Refresh"
+            android:src="@drawable/custom_refresh"
+            android:background="@android:color/darker_gray"
+            android:layout_alignTop="@+id/moca1Play"
+            android:layout_below="@+id/moca1Play"
+            android:layout_toRightOf="@+id/moca1Play" />
 
-            <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:id="@+id/moca1Refresh"
-                android:src="@drawable/custom_refresh"
-                android:background="@android:color/darker_gray"
-                android:layout_alignTop="@+id/moca1Play"
-                android:layout_below="@+id/moca1Play"
-                android:layout_toRightOf="@+id/moca1Play" />
-
-            <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:id="@+id/moca1Next"
-                android:src="@drawable/custom_next"
-                android:onClick="moca2Create"
-                android:background="@android:color/darker_gray"
-                android:layout_alignParentRight="true"
-                android:layout_alignBottom="@+id/moca1Play"
-                android:layout_alignTop="@+id/moca1Play" />
-
-        </RelativeLayout>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/moca1View"
-            android:layout_gravity="center"
-            android:layout_centerInParent="true" />
-
-        <Chronometer
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/moca1Chrono"
-            android:layout_centerHorizontal="true"
-            android:layout_above="@+id/moca1View" />
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/moca1Next"
+            android:src="@drawable/custom_next"
+            android:onClick="moca2Create"
+            android:background="@android:color/darker_gray"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@+id/moca1Play"
+            android:layout_alignTop="@+id/moca1Play" />
 
     </RelativeLayout>
 
-</FrameLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/moca1View"
+        android:layout_gravity="center"
+        android:layout_centerInParent="true" />
+
+    <Chronometer
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/moca1Chrono"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/moca1View" />
+
+</RelativeLayout>

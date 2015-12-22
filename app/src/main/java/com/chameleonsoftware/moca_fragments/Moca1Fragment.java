@@ -62,16 +62,18 @@ public class Moca1Fragment extends Fragment implements View.OnTouchListener{
         mNextBtn = (ImageButton) rootView.findViewById(R.id.moca1Next);
         mChrono = (Chronometer) rootView.findViewById(R.id.moca1Chrono);
 
-
+        //Bitmap setup
+        mCanvas = new Canvas();
+        mPaint = new Paint();
         bmSetup();
-        moca1refresh();
+        bmReset();
 
         mImageVisor.setOnTouchListener(this);
         mRefreshBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                moca1refresh();
+                bmReset();
             }
 
         });
@@ -158,18 +160,17 @@ public class Moca1Fragment extends Fragment implements View.OnTouchListener{
 
             //Nuevas pulgadas de la imágen
             double newinchesL = pixelSizeAreaeq[0]/totalDIP_X;
-            double newinchesA = 2.56*newinchesL/2.76;
+            double newinchesA = realSizeArea[1]*newinchesL/realSizeArea[0];
 
             pixelSizeAreaeq[1] = (int)(newinchesA*totalDIP_Y);
         }
     }
 
-    public void moca1refresh(){
+    public void bmReset(){
         mDrawingBitmap = Bitmap.createScaledBitmap (mutableBitmap, pixelSizeAreaeq[0], pixelSizeAreaeq[1], false);
-        mCanvas = new Canvas(mDrawingBitmap);
+        mCanvas.setBitmap(mDrawingBitmap);
 
         //Painter
-        mPaint = new Paint();
         mPaint.setColor(Color.GRAY);
         mPaint.setStrokeWidth(15);
         mPaint.setStyle(Paint.Style.STROKE);
@@ -180,8 +181,6 @@ public class Moca1Fragment extends Fragment implements View.OnTouchListener{
         //Cambio de paleta para dibujar
         mPaint.setColor(Color.BLACK);
         mPaint.setStrokeWidth(8);
-
-        //mDrawingBitmap = moca1RefreshClick(rootView);
 
         //Visor
         mImageVisor.setImageBitmap(mDrawingBitmap);

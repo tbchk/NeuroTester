@@ -1,97 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical|center_horizontal"
-            android:id="@+id/LayoutTitulo"
-            android:weightSum="1"
-            android:layout_marginBottom="10dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="false"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="0dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/moca2TimerText"
-                android:textStyle="bold"
-                android:textAlignment="center" />
-        </LinearLayout>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/moca2view1"
-            android:layout_gravity="center"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/LayoutTitulo" />
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:id="@+id/LayoutTitulo"
+        android:weightSum="1"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="false"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Copiar el cubo"
-            android:id="@+id/textView23"
-            android:textAlignment="center"
-            android:layout_below="@+id/moca2view1"
-            android:layout_marginTop="30dp" />
-
-        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/moca4View"
-            android:layout_gravity="center"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/textView23" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/moca2TimerText"
+            android:textStyle="bold"
+            android:textAlignment="center" />
+    </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Bar"
-            android:layout_below="@+id/moca4View"
-            android:layout_alignLeft="@+id/moca4View"
-            android:layout_alignRight="@+id/moca4View">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Bar"
+        android:layout_below="@+id/moca4View"
+        android:layout_alignLeft="@+id/moca4View"
+        android:layout_alignRight="@+id/moca4View">
 
-            <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:id="@+id/moca4StartButton"
-                android:src="@drawable/custom_play"
-                android:onClick="moca1RefreshClick"
-                android:layout_alignParentStart="true"
-                android:background="@android:color/holo_green_dark"
-                android:layout_alignParentLeft="true" />
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/moca4StartButton"
+            android:src="@drawable/custom_play"
+            android:onClick="moca1RefreshClick"
+            android:layout_alignParentStart="true"
+            android:background="@android:color/holo_green_dark"
+            android:layout_alignParentLeft="true" />
 
-            <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:id="@+id/moca2RefreshButton"
-                android:src="@drawable/custom_refresh"
-                android:onClick="moca1RefreshClick"
-                android:background="@android:color/darker_gray"
-                android:layout_alignTop="@+id/moca4StartButton"
-                android:layout_alignBottom="@+id/moca4StartButton"
-                android:layout_toRightOf="@+id/moca4StartButton" />
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/moca2RefreshButton"
+            android:src="@drawable/custom_refresh"
+            android:onClick="moca1RefreshClick"
+            android:background="@android:color/darker_gray"
+            android:layout_alignTop="@+id/moca4StartButton"
+            android:layout_alignBottom="@+id/moca4StartButton"
+            android:layout_toRightOf="@+id/moca4StartButton" />
 
-            <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:id="@+id/moca4NextButton"
-                android:src="@drawable/custom_next"
-                android:onClick="moca3Create"
-                android:background="@android:color/darker_gray"
-                android:layout_alignParentRight="true" />
-        </RelativeLayout>
-
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/moca4NextButton"
+            android:src="@drawable/custom_next"
+            android:onClick="moca3Create"
+            android:background="@android:color/darker_gray"
+            android:layout_alignParentRight="true" />
     </RelativeLayout>
-</FrameLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/moca4View"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/textView23" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Copiar el cubo"
+        android:id="@+id/textView23"
+        android:textAlignment="center"
+        android:layout_below="@+id/moca2view1"
+        android:layout_marginTop="30dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/moca2view1"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/LayoutTitulo" />
+</RelativeLayout>
